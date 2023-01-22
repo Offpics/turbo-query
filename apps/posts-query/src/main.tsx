@@ -7,6 +7,8 @@ import App from "./App";
 import "./index.css";
 import { router } from "./routes";
 import "@picocss/pico/css/pico.min.css";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 // Create a client
 const queryClient = new QueryClient({
@@ -15,11 +17,13 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <main>
-        <RouterProvider router={router} />
-      </main>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <main>
+          <RouterProvider router={router} />
+        </main>
+      </QueryClientProvider>
+    </Provider>
   </React.StrictMode>
 );
