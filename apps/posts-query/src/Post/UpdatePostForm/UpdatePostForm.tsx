@@ -9,18 +9,10 @@ export const UpdatePostForm = ({ postId }: { postId: string }) => {
   // @ts-ignore
   const onSubmit = (data) => {
     console.log(data);
-    mutateAsync(
-      {
-        ...data,
-        id: postId,
-      },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["posts", postId] });
-          queryClient.invalidateQueries({ queryKey: ["posts"] });
-        },
-      }
-    );
+    mutateAsync({
+      ...data,
+      id: postId,
+    });
   };
 
   return (
