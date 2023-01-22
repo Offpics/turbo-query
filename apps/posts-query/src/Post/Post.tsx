@@ -1,11 +1,12 @@
 import { Link, useParams } from "@tanstack/react-router";
 import { usePostQuery } from "../hooks/usePostQuery";
 import { useUsersQuery } from "../hooks/useUsersQuery";
+import { useGetPostByIdQuery } from "../services/posts";
 import { UpdatePostForm } from "./UpdatePostForm";
 
 export const Post = () => {
   const { id } = useParams();
-  const { data: post, isLoading: isPostLoading } = usePostQuery(id);
+  const { data: post, isLoading: isPostLoading } = useGetPostByIdQuery(id);
   const { data: users, isLoading: isUserLoading } = useUsersQuery();
 
   if (isPostLoading || isUserLoading) {

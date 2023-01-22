@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { usePostsQuery } from "../hooks/usePostsQuery";
+import { useGetPostsQuery } from "../services/posts";
 import { NewPostForm } from "./NewPostForm";
 
 export const PostsList = () => {
-  const { data: posts, isLoading } = usePostsQuery();
+  const { data: posts, isLoading } = useGetPostsQuery();
 
   if (isLoading) {
     return <div>Loading...</div>;
