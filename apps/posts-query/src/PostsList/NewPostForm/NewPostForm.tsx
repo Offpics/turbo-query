@@ -1,22 +1,17 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { useNewPostMutation } from "../../hooks/useNewPostMutation";
+import { useNewPostMutation } from "../../services/posts";
 
 export const NewPostForm = () => {
   const queryClient = useQueryClient();
   const { register, handleSubmit } = useForm();
-  const { mutateAsync } = useNewPostMutation();
+  const [newPost] = useNewPostMutation();
   // @ts-ignore
   const onSubmit = (data) => {
-    mutateAsync(
-      {
-        ...data,
-        authorEmail: "alice@prisma.io",
-      },
-      {
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
-      }
-    );
+    newPost({
+      ...data,
+      authorEmail: "alice@prisma.io",
+    });
   };
 
   return (
