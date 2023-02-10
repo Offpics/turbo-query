@@ -1,15 +1,13 @@
-import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { useUpdatePostMutation } from "../../hooks/useUpdatePostMutation";
+import { useUpdatePostMutation } from "../../services/posts";
 
 export const UpdatePostForm = ({ postId }: { postId: string }) => {
-  const queryClient = useQueryClient();
   const { register, handleSubmit } = useForm();
-  const { mutateAsync } = useUpdatePostMutation();
+  const [updatePost] = useUpdatePostMutation();
   // @ts-ignore
   const onSubmit = (data) => {
     console.log(data);
-    mutateAsync({
+    updatePost({
       ...data,
       id: postId,
     });
